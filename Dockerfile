@@ -2,10 +2,10 @@
 FROM node:14
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /oddjobs
 
 # Copy package.json and package-lock.json (if available) to install dependencies first
-COPY package*.json ./
+COPY oddjobs/package*.json ./
 
 # Install dependencies
 RUN npm install
