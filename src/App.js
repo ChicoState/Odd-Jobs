@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListIt
 import MenuIcon from '@mui/icons-material/Menu';
 import Login from './Login';
 import Forum from './Forum';
+import CreateAccount from './CreateAccount';
 
 function App() {
   const [open, setOpen] = React.useState(false); // state to control the drawer
@@ -30,7 +31,10 @@ function App() {
       <Drawer open={open} onClose={toggleDrawer}>
         <List>
           {/* Links to navigate to different routes */}
-          <ListItem button component={Link} to="/" onClick={toggleDrawer}>
+	  <ListItem button component={Link} to="/CreateAccount" onClick={toggleDrawer}>
+	    <ListItemText primary="Create Account" />
+	  </ListItem>
+          <ListItem button component={Link} to="/forum" onClick={toggleDrawer}>
             <ListItemText primary="Forum" />
           </ListItem>
           <ListItem button component={Link} to="/" onClick={toggleDrawer}>
@@ -42,11 +46,12 @@ function App() {
 
 
       {/* Routes for teh application */}
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/forum" element={<Forum />} />
-      </Routes>
-    </Router>
+            <Routes>
+	          <Route path="/" element={<Login />} />
+	          <Route path="/forum" element={<Forum />} />
+	  	  <Route path="/CreateAccount" element={<CreateAccount />} />
+	        </Routes>
+	      </Router>
   );
 }
 

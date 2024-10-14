@@ -30,7 +30,7 @@ function Login() {
           label="Username"
           variant="outlined"
           fullWidth
-          margin="normal"
+	  margin="normal"
           value={username}
           onChange={(e) => setUsername(e.target.value)} // Update username state
         />
@@ -39,7 +39,7 @@ function Login() {
           type="password"
           variant="outlined"
           fullWidth
-          margin="normal"
+	  margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)} // Update password state
         />
@@ -49,7 +49,17 @@ function Login() {
             Login
           </Button>
         </Link>
-      </form>
+	</form>
+	 {/*END OF LOGIN*/}
+
+	 {/*Link to navigate to the CreateAccount page*/}
+	 <Typography variant="body2" style={{ marginTop: '10px' }}>
+	  	Don't have an account?{' '}
+	 <Link to="/CreateAccount" style={{ textDecoration: 'underline', color: 'blue' }}>
+		Sign Up
+	 </Link>
+	 </Typography>
+	{/*END OF CREATE ACCOUNT*/}
     </Container>
   );
 }
