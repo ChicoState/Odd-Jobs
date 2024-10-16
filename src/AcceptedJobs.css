@@ -1,0 +1,63 @@
+/* Style for the container */
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for the title */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the job list */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Style for each job item */
+li {
+    background-color: #f9f9f9;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+/* Hover effect for job items */
+li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Style for job name */
+li h2 {
+    margin: 0;
+    color: #555;
+}
+
+/* Style for job details */
+li p {
+    margin: 5px 0;
+    color: #777;
+}
+
+/* High urgency color */
+.high {
+    border-left: 5px solid red;
+}
+
+/* Medium urgency color */
+.medium {
+    border-left: 5px solid orange;
+}
+
+/* Low urgency color */
+.low {
+    border-left: 5px solid green;
+}
