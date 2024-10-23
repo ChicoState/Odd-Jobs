@@ -1,0 +1,52 @@
+/* Style for the container */
+.container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for the title */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the cards container */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Style for each worker card */
+.worker-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Hover effect for the card */
+.worker-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Style for the worker name */
+.worker-card h2 {
+    margin: 0;
+    color: #333;
+}
+
+/* Style for the worker details */
+.worker-card p {
+    margin: 5px 0;
+    color: #555;
+}
