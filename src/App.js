@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListIt
 import MenuIcon from '@mui/icons-material/Menu';
 import Login from './Login';
 import Forum from './Forum';
+import AcceptedJobs from './AcceptedJobs';
 import CreateAccount from './CreateAccount';
 
 function App() {
@@ -40,18 +41,22 @@ function App() {
           <ListItem button component={Link} to="/" onClick={toggleDrawer}>
             <ListItemText primary="Login" />
           </ListItem>
+          <ListItem button component={Link} to="/acceptedjob" onClick={toggleDrawer}>
+            <ListItemText primary="AcceptedJobs" />
+          </ListItem>
         </List>
       </Drawer>
 
 
 
       {/* Routes for teh application */}
-            <Routes>
-	          <Route path="/" element={<Login />} />
-	          <Route path="/forum" element={<Forum />} />
-	  	  <Route path="/CreateAccount" element={<CreateAccount />} />
-	        </Routes>
-	      </Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/forum" element={<Forum />} />
+        <Route path="/acceptedjob" element={<AcceptedJobs />} />
+      	<Route path="/CreateAccount" element={<CreateAccount />} />
+      </Routes>
+    </Router>
   );
 }
 
