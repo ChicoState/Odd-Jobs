@@ -6,6 +6,7 @@ import Login from './Login';
 import Forum from './Forum';
 import AcceptedJobs from './AcceptedJobs';
 import CreateAccount from './CreateAccount';
+import PastWorkersHistory from './PastWorkersHistory';
 
 function App() {
   const [open, setOpen] = React.useState(false); // state to control the drawer
@@ -32,9 +33,9 @@ function App() {
       <Drawer open={open} onClose={toggleDrawer}>
         <List>
           {/* Links to navigate to different routes */}
-	  <ListItem button component={Link} to="/CreateAccount" onClick={toggleDrawer}>
-	    <ListItemText primary="Create Account" />
-	  </ListItem>
+	        <ListItem button component={Link} to="/CreateAccount" onClick={toggleDrawer}>
+	          <ListItemText primary="Create Account" />
+	        </ListItem>
           <ListItem button component={Link} to="/forum" onClick={toggleDrawer}>
             <ListItemText primary="Forum" />
           </ListItem>
@@ -43,6 +44,9 @@ function App() {
           </ListItem>
           <ListItem button component={Link} to="/acceptedjob" onClick={toggleDrawer}>
             <ListItemText primary="AcceptedJobs" />
+          </ListItem>
+          <ListItem button component={Link} to="/pastworkershistory" onClick={toggleDrawer}>
+            <ListItemText primary="PastWorkersHistory" />
           </ListItem>
         </List>
       </Drawer>
@@ -55,6 +59,7 @@ function App() {
         <Route path="/forum" element={<Forum />} />
         <Route path="/acceptedjob" element={<AcceptedJobs />} />
       	<Route path="/CreateAccount" element={<CreateAccount />} />
+        <Route path="/PastWorkersHistory" element={<PastWorkersHistory />} />
       </Routes>
     </Router>
   );
