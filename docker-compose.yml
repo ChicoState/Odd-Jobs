@@ -1,0 +1,22 @@
+version: '3'
+services:
+  backend:
+    build: .
+    container_name: backend_api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongodb:27017/odd-jobs-db
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
