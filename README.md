@@ -90,7 +90,9 @@ node backend/server.js
 
 # start database
 mongosh
+
 # connect to db
 use oddJobs
+
 # view users
 db.users.find().pretty()
