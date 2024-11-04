@@ -69,3 +69,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Update the package list
+sudo apt-get update
+
+# Install MongoDB
+sudo apt-get install -y mongodb
+mongod --dbpath /data/db
+# If /data/db not found
+sudo mkdir -p /data/db
+sudo chown -R $(whoami) /data/db
+
+mongod --dbpath /data/db
+
+# connect
+mongo
+
+# start backend
+node backend/server.js
+
+# start database
+mongosh
+
+# connect to db
+use oddJobs
+
+# view users
+db.users.find().pretty()
