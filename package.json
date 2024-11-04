@@ -29,7 +29,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://didactic-space-guide-69g79xrq5xjr25466-5000.app.github.dev",
   "eslintConfig": {
     "extends": [
       "react-app",

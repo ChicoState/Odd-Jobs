@@ -15,7 +15,7 @@ const app = express();
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'https://didactic-space-guide-69g79xrq5xjr25466-3000.app.github.dev', // Replace with your frontend URL
+  origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -54,7 +54,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
