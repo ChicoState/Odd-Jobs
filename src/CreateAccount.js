@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Container, TextField, Typography, Grid } from '@mui/material';
 
 export default function CreateAccount() {
@@ -9,7 +9,7 @@ export default function CreateAccount() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleCreateAccount = async (event) => {
     event.preventDefault();
@@ -21,29 +21,27 @@ export default function CreateAccount() {
     }
 
     try {
-      const response = await fetch('http://localhost:5050/api/users', {
+      // Sending a POST request to register the new user
+      const response = await fetch('http://localhost:5050/api/users/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: `${name} ${lastname}`,
           email,
           password,
           phone: phoneNumber,
           isStudent: false
-        })
+        }),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`Failed to create account. Status: ${response.status}`);
       }
 
       const data = await response.json();
       console.log('Account created:', data);
       alert("Account successfully created!");
-      navigate('/'); // Use navigate instead of history.push
+      navigate('/'); // Redirect to login or another page
 
     } catch (error) {
       console.error("Error creating account:", error);
