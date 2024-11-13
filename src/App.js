@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Login from './Login';
@@ -7,6 +7,7 @@ import Forum from './Forum';
 import AcceptedJobs from './AcceptedJobs';
 import CreateAccount from './CreateAccount';
 import PastWorkersHistory from './PastWorkersHistory';
+import PostJobPage from './PostJobPage';
 
 function App() {
   const [open, setOpen] = React.useState(false); // state to control the drawer
@@ -16,6 +17,7 @@ function App() {
     setOpen((prev) => !prev);
     console.log(open);
   };
+
   return (
     <Router>
       <AppBar position="static">
@@ -28,42 +30,42 @@ function App() {
         </Toolbar>
       </AppBar>
 
-
       {/* Drawer component */}
       <Drawer open={open} onClose={toggleDrawer}>
         <List>
           {/* Links to navigate to different routes */}
-	        <ListItem button component={Link} to="/CreateAccount" onClick={toggleDrawer}>
-	          <ListItemText primary="Create Account" />
-	        </ListItem>
-          <ListItem button component={Link} to="/forum" onClick={toggleDrawer}>
-            <ListItemText primary="Forum" />
-          </ListItem>
           <ListItem button component={Link} to="/" onClick={toggleDrawer}>
             <ListItemText primary="Login" />
           </ListItem>
+          <ListItem button component={Link} to="/CreateAccount" onClick={toggleDrawer}>
+            <ListItemText primary="Create Account" />
+          </ListItem>
+          <ListItem button component={Link} to="/PostJobPage" onClick={toggleDrawer}>
+            <ListItemText primary="Post a Job" />
+          </ListItem>
+          <ListItem button component={Link} to="/forum" onClick={toggleDrawer}>
+            <ListItemText primary="Forum" />
+          </ListItem>
           <ListItem button component={Link} to="/acceptedjob" onClick={toggleDrawer}>
-            <ListItemText primary="AcceptedJobs" />
+            <ListItemText primary="Accepted Jobs" />
           </ListItem>
           <ListItem button component={Link} to="/pastworkershistory" onClick={toggleDrawer}>
-            <ListItemText primary="PastWorkersHistory" />
+            <ListItemText primary="Past Workers History" />
           </ListItem>
         </List>
       </Drawer>
 
-
-
-      {/* Routes for teh application */}
+      {/* Routes for the application */}
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/CreateAccount" element={<CreateAccount />} />
+        <Route path="/PostJobPage" element={<PostJobPage />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/acceptedjob" element={<AcceptedJobs />} />
-      	<Route path="/CreateAccount" element={<CreateAccount />} />
-        <Route path="/PastWorkersHistory" element={<PastWorkersHistory />} />
+        <Route path="/pastworkershistory" element={<PastWorkersHistory />} />
       </Routes>
     </Router>
   );
 }
-
 
 export default App;
