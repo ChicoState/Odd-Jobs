@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, Typography, Button, Grid, Paper, CircularProgress, Alert, TextField } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -33,11 +33,7 @@ const JobListPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchJobs();
-  }, []);
-
-  const fetchJobs = async () => {
+  const fetchJobs = useCallback(async () => {
     setLoading(true);
     try {
       const query = new URLSearchParams(filters).toString();
@@ -52,7 +48,11 @@ const JobListPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
