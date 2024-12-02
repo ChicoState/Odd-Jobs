@@ -4,8 +4,13 @@ const jobSchema = new mongoose.Schema({
   title: String,
   description: String,
   location: String,
-  pay: String,
-  duration: String,
+  pay: {
+    type: Number,
+    required: true,
+  },
+  duration: {
+    type: Number,
+  },
   picked: {
     type: Boolean,
     default: false
