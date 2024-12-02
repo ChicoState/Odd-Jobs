@@ -3,7 +3,17 @@ const mongoose = require('mongoose');
 const jobSchema = new mongoose.Schema({
   title: String,
   description: String,
-  completed: Boolean,
+  location: String,
+  pay: String,
+  duration: String,
+  picked: {
+    type: Boolean,
+    default: false
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  },
   datePosted: {
     type: Date,
     default: Date.now

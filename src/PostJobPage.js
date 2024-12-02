@@ -60,11 +60,31 @@ const PostJobPage = () => {
   const handleOpenReview = () => setReviewDialogOpen(true);
   const handleCloseReview = () => setReviewDialogOpen(false);
 
-  const handleConfirmSubmit = () => {
-    console.log("Job posted:", jobData);
-    setReviewDialogOpen(false);
-    alert("Job posted successfully!");
+  const handleConfirmSubmit = async () => {
+    try {
+      const response = await fetch("http://localhost:5050/api/jobs/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jobData),
+      });
+  
+      if (response.ok) {
+        alert("Job posted successfully!");
+      } else {
+        const errorData = await response.json();
+        console.error("Error posting job:", errorData);
+        alert("Failed to post job. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error posting job:", error);
+      alert("An error occurred while posting the job.");
+    } finally {
+      setReviewDialogOpen(false);
+    }
   };
+  
 
   return (
     <FormContainer>
