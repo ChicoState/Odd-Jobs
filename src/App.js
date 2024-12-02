@@ -8,6 +8,7 @@ import AcceptedJobs from './AcceptedJobs';
 import CreateAccount from './CreateAccount';
 import PastWorkersHistory from './PastWorkersHistory';
 import PostJobPage from './PostJobPage';
+import JobListPage from './JobListPage';
 
 function App() {
   const [open, setOpen] = React.useState(false); // state to control the drawer
@@ -43,6 +44,9 @@ function App() {
           <ListItem button component={Link} to="/PostJobPage" onClick={toggleDrawer}>
             <ListItemText primary="Post a Job" />
           </ListItem>
+          <ListItem button component={Link} to="/JobListPage" onClick={toggleDrawer}>
+            <ListItemText primary="View Job Listing" />
+          </ListItem>
           <ListItem button component={Link} to="/forum" onClick={toggleDrawer}>
             <ListItemText primary="Forum" />
           </ListItem>
@@ -60,6 +64,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/CreateAccount" element={<CreateAccount />} />
         <Route path="/PostJobPage" element={<PostJobPage />} />
+        <Route path="/JobListPage" element={<JobListPage />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/acceptedjob" element={<AcceptedJobs />} />
         <Route path="/pastworkershistory" element={<PastWorkersHistory />} />
