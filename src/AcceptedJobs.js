@@ -1,49 +1,132 @@
 import React, { useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
+import './AcceptedJobs.css';
 
-// Sample data for accepted jobs
-const initialJobs = [
-  { id: 1, name: 'Fix plumbing', dueDate: '2024-10-15', priority: 'high' },
-  { id: 2, name: 'Paint house', dueDate: '2024-10-20', priority: 'medium' },
-  { id: 3, name: 'Garden work', dueDate: '2024-10-12', priority: 'low' },
-];
 
+const containerStyle = {
+  width: '100%',
+  height: '450px' //height for map
+};
+
+const defaultCenter = { lat: 39.7283, lng: -121.8380 }; //center of chico
+
+//func for marker color
+const getMarkerIcon = (priority) => {
+  const baseIconUrl = 'http://maps.google.com/mapfiles/ms/icons/';
+  switch (priority) {
+    case 'high':
+      return { url: baseIconUrl + 'red-dot.png', scaledSize: new window.google.maps.Size(32, 32) };
+    case 'medium':
+      return { url: baseIconUrl + 'yellow-dot.png', scaledSize: new window.google.maps.Size(32, 32) };
+    case 'low':
+      return { url: baseIconUrl + 'green-dot.png', scaledSize: new window.google.maps.Size(32, 32) };
+    default:
+      return { url: baseIconUrl + 'blue-dot.png', scaledSize: new window.google.maps.Size(32, 32) };
+  }
+};
+
+//entire function for running acceptedjobs page
 const AcceptedJobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [filter, setFilter] = useState('all');  //stores current filter selected
+  const [mapLoaded, setMapLoaded] = useState(false);  //state to track if map API is loaded, need before color markers
 
-  // Sort jobs by urgency (earliest due date first)
+
   useEffect(() => {
-    const sortedJobs = [...initialJobs].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-    setJobs(sortedJobs);
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch('http://localhost:5050/api/jobs');
+        const data = await response.json();
+        setJobs(data);
+      } catch (error) {
+        console.error('Error fetching jobs:', error);
+      }
+    };
+    fetchJobs();
   }, []);
 
-  // Function to determine the urgency level
-  const getUrgencyColor = (priority) => {
-    switch (priority) {
-      case 'high':
-        return 'red';
-      case 'medium':
-        return 'orange';
-      case 'low':
-        return 'green';
-      default:
-        return 'black';
-    }
+  const filteredJobs = jobs.filter(job => filter === 'all' || job.priority === filter);
+
+  const handleMarkerClick = (job) => {
+    setSelectedJob(job); //update selected job in list to the clicked marker
   };
 
   return (
-    <div>
-      <h1>Accepted Jobs</h1>
-      <ul>
-        {jobs.map((job) => (
-          <li key={job.id} style={{ color: getUrgencyColor(job.priority) }}>
-            <h2>{job.name}</h2>
-            <p>Due Date: {new Date(job.dueDate).toLocaleDateString()}</p>
-            <p>Priority: {job.priority}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <LoadScript
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} // Key in .env
+      onLoad={() => setMapLoaded(true)}
+    >
+      <div className="container">
+        <div className="topSection">
+          <div className="filterBox">
+            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+              <option value="all">All Urgencies</option>
+              <option value="high">High Urgency</option>
+              <option value="medium">Medium Urgency</option>
+              <option value="low">Low Urgency</option>
+            </select>
+          </div>
+          <div className="jobList">
+            <h1>Accepted Jobs</h1>
+            <ul>
+              {filteredJobs.map((job) => (
+                <li key={job._id} onClick={() => setSelectedJob(job)}>
+                  {job.title}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {mapLoaded && (
+            <div className="mapContainer">
+              <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={selectedJob?.coordinates || defaultCenter}
+                zoom={12}
+              >
+                {filteredJobs.map((job) =>
+                  job.coordinates ? (
+                    <MarkerF
+                      key={job._id}
+                      position={{
+                        lat: parseFloat(job.coordinates.lat),
+                        lng: parseFloat(job.coordinates.lng),
+                      }}
+                      icon={getMarkerIcon(job.priority)}
+                      onClick={() => handleMarkerClick(job)}
+                    />
+                  ) : null
+                )}
+                {selectedJob && selectedJob.coordinates && (
+                  <InfoWindowF
+                    position={{
+                      lat: parseFloat(selectedJob.coordinates.lat),
+                      lng: parseFloat(selectedJob.coordinates.lng),
+                    }}
+                    onCloseClick={() => setSelectedJob(null)}
+                  >
+                    <div>
+                      <h3>{selectedJob.title}</h3>
+                      <p>Due: {new Date(selectedJob.dueDate).toLocaleDateString()}</p>
+                      <p>Priority: {selectedJob.priority}</p>
+                    </div>
+                  </InfoWindowF>
+                )}
+              </GoogleMap>
+            </div>
+          )}
+        </div>
+        {selectedJob && (
+          <div className="jobDetails">
+            <h2>Details for {selectedJob.title}</h2>
+            <p>Description: {selectedJob.description || 'No description provided.'}</p>
+            <p>Due: {new Date(selectedJob.dueDate).toLocaleDateString()}</p>
+            <p>Priority: {selectedJob.priority}</p>
+          </div>
+        )}
+      </div>
+    </LoadScript>
   );
-};
+}; 
 
 export default AcceptedJobs;
