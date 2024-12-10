@@ -1,0 +1,22 @@
+// Profile.js
+import * as React from 'react';
+import { Container, Typography } from '@mui/material'; // Importing Material-UI components
+const NAVIGATION = [
+	{ kind: 'header', title: 'Main items',}, { segment: 'profile', title: 'Profile',}, ];
+export default function Profile() {
+	const handleSubmit = async (event) => {
+		event.preventDefault(); // Prevent the default form submission
+	  };
+	return (
+		<div style={{ backgroundImage: "url(https://miro.medium.com/v2/resize:fit:1200/1*b8WS2iEvZCQYlXq46gKpqw.jpeg)", backgroundSize: 'cover', backgroundRepeat: 'no-repeat',}}>
+		<Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+		      <Typography variant="h4" gutterBottom>
+		        Profile
+		      </Typography>
+		<Button component={Link} to="/PostJobPage" style={{ padding: 0, borderRadius: '8px', overflow: 'hidden',}}>
+		<img src="" alt="Post A Job" style={{ width: '150px', height: '150px', objectFit: 'cover'}}/>
+		</Button>
+		</Container>
+		</div>
+	);
+}

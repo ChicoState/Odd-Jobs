@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 
 // Sample data for accepted jobs
 const initialJobs = [
@@ -31,7 +34,10 @@ const AcceptedJobs = () => {
   };
 
   return (
-    <div>
+	  <div style={{ position: 'relative', padding: '20px' }}>
+	  <Button variant="contained" color="primary" component={Link} to="/profile" startIcon={<HomeIcon />} style={{position: 'absolute', top: '20px', right: '10px',backgroundColor: '#828282', color: '#fff',}}>
+	  Home
+	  </Button>
       <h1>Accepted Jobs</h1>
       <ul>
         {jobs.map((job) => (

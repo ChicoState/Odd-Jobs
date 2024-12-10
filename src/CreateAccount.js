@@ -6,6 +6,7 @@ export default function CreateAccount() {
   const [name, setName] = useState('');
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState(''); // Username
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -50,6 +51,7 @@ export default function CreateAccount() {
   };
 
   return (
+   <div style={{ backgroundImage: "url(https://miro.medium.com/v2/resize:fit:1200/1*b8WS2iEvZCQYlXq46gKpqw.jpeg)", backgroundSize: 'cover', backgroundRepeat: 'no-repeat',}}>
     <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <Typography variant="h4" gutterBottom>
         Create your Odd Jobs Account
@@ -65,6 +67,8 @@ export default function CreateAccount() {
               margin="normal"
               value={name}
               onChange={(e) => setName(e.target.value)}
+	      InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	      InputLabelProps={{ style: { color: "#000",},}}
             />
           </Grid>
           <Grid item xs={6}>
@@ -76,6 +80,8 @@ export default function CreateAccount() {
               margin="normal"
               value={lastname}
               onChange={(e) => setLastName(e.target.value)}
+	      InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	      InputLabelProps={{ style: { color: "#000",},}}
             />
           </Grid>
         </Grid>
@@ -87,6 +93,8 @@ export default function CreateAccount() {
           margin="normal"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+	  InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	  InputLabelProps={{ style: { color: "#000",},}}
         />
         <TextField
           label="Phone Number"
@@ -96,7 +104,20 @@ export default function CreateAccount() {
           margin="normal"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
+	  InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	  InputLabelProps={{ style: { color: "#000",},}}
         />
+	  <TextField
+	    label="Username"
+	    type="username"
+	    variant="outlined"
+	    fullWidth
+	    margin="normal"
+	    value={username}
+	    onChange={(e) => setUsername(e.target.value)}
+	    InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	    InputLabelProps={{ style: { color: "#000",},}}
+	  />
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <TextField
@@ -107,6 +128,8 @@ export default function CreateAccount() {
               margin="normal"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+	      InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	      InputLabelProps={{ style: { color: "#000",},}}
             />
           </Grid>
           <Grid item xs={6}>
@@ -118,6 +141,8 @@ export default function CreateAccount() {
               margin="normal"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+	      InputProps={{ style: { color: "#000", borderColor: "#000",},}}
+	      InputLabelProps={{ style: { color: "#000",},}}
             />
           </Grid>
         </Grid>
@@ -134,12 +159,15 @@ export default function CreateAccount() {
             </Typography>
           </Grid>
           <Grid item xs={6} container justifyContent="flex-end">
+	    <Link to="/Profile" style={{ textDecoration: 'none' }}>
             <Button variant="contained" color="primary" type="submit">
               Next
             </Button>
+	   </Link>
           </Grid>
         </Grid>
       </form>
     </Container>
+</div>
   );
 }
