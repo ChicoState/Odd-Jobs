@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:16
+FROM node:20
 
 # Set the working directory to /app
 WORKDIR /app
@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start the application
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "start" ]
