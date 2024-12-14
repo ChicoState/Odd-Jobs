@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { styled } from '@mui/system';
+import HomeIcon from '@mui/icons-material/Home';
 import './PastWorkersHistory.css';  // Make sure to import the CSS
+
+const TopRightButton = styled(Button)({ position: 'absolute', top: '20px', right: '20px', backgroundColor: '#828282', color: '#fff', '&:hover': {backgroundColor: '#828282',},});
 
 // Sample data for past workers
 const initialWorkers = [
@@ -23,7 +29,10 @@ const PastWorkersHistory = () => {
   };
 
   return (
-    <div className="container">
+	  <div className="container" style={{ position: 'relative', padding: '20px' }}>
+	  <TopRightButton variant="contained" component={Link} to="/profile" startIcon={<HomeIcon />}>
+	  Home
+	  </TopRightButton>
       <h1>Past Workers History</h1>
       <div className="cards-container">
         {workers.map((worker) => (

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Paper, Alert } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 
 const FormContainer = styled(Paper)({
   padding: '20px',
@@ -24,6 +26,8 @@ const ImagePreview = styled('img')({
   borderRadius: '8px',
   margin: '5px',
 });
+
+const TopRightButton = styled(Button)({ position: 'absolute', top: '20px', right: '20px', backgroundColor: '#828282', color: '#fff', '&:hover': {backgroundColor: '#828282',},});
 
 const PostJobPage = () => {
   const [jobData, setJobData] = useState({
@@ -87,6 +91,10 @@ const PostJobPage = () => {
   
 
   return (
+	  <>
+	  <TopRightButton variant="contained" component={Link} to="/profile" startIcon={<HomeIcon />}>
+	  Profile
+	  </TopRightButton>
     <FormContainer>
       <Typography variant="h5" gutterBottom align="center">Post a Job</Typography>
       
@@ -208,6 +216,7 @@ const PostJobPage = () => {
         </DialogActions>
       </Dialog>
     </FormContainer>
+	  </>
   );
 };
 
