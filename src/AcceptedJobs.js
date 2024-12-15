@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import './AcceptedJobs.css';
-
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 
 const containerStyle = {
   width: '100%',
@@ -53,6 +55,11 @@ const AcceptedJobs = () => {
   };
 
   return (
+	  <div style={{ position: 'relative', padding: '20px' }}>
+	  <Button variant="contained" color="primary" component={Link} to="/profile" startIcon={<HomeIcon />} style={{position: 'absolute', top: '20px', right: '10px',backgroundColor: '#828282', color: '#fff',}}>
+	  Home
+	  </Button>
+
     <LoadScript
       googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} // Key in .env
       onLoad={() => setMapLoaded(true)}
@@ -126,6 +133,7 @@ const AcceptedJobs = () => {
         )}
       </div>
     </LoadScript>
+	  </div>
   );
 }; 
 

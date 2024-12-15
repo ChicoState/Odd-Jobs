@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, Typography, Button, Grid, Paper, CircularProgress, Alert, TextField } from '@mui/material';
 import { styled } from '@mui/system';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
 
 const PageContainer = styled(Paper)({
   padding: '20px',
@@ -20,6 +22,8 @@ const JobCard = styled(Card)({
   margin: '10px',
   width: '100%',
 });
+
+const TopRightButton = styled(Button)({ position: 'absolute', top: '20px', right: '20px', backgroundColor: '#828282', color: '#fff', '&:hover': {backgroundColor: '#828282',},});
 
 const JobListPage = () => {
   const [jobs, setJobs] = useState([]);
@@ -92,6 +96,10 @@ const JobListPage = () => {
   };
 
   return (
+	  <>
+	  <TopRightButton variant="contained" component={Link} to="/profile" startIcon={<HomeIcon />}>
+	  Profile
+	  </TopRightButton>
     <PageContainer>
       <Typography variant="h4" gutterBottom align="center">
         Job Postings
@@ -180,6 +188,7 @@ const JobListPage = () => {
         ))}
       </Grid>
     </PageContainer>
+	  </>
   );
 };
 
