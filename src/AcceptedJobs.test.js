@@ -1,10 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { act } from 'react';
+import { MemoryRouter } from 'react-router';
 import AcceptedJobs from './AcceptedJobs';
 
-test('renders Accepted Jobs page', () => {
-  act(() => {
-    render(<AcceptedJobs />);
-  });
-  expect(screen.getByText(/Accepted Jobs/i)).toBeInTheDocument();
+test('renders Accepted Jobs page', async () => {
+  render(
+    <MemoryRouter>
+      <AcceptedJobs />
+    </MemoryRouter>
+  );
+  expect(await screen.findByText(/Loading.../i)).toBeInTheDocument();
 });

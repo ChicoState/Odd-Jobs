@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router';
 import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Login from './Login';
@@ -25,7 +25,7 @@ function App() {
       <AppBar position="static">
         <Toolbar>
           {/* Icon button to open the drawer */}
-          <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
+          <IconButton aria-label="menu" edge="start" color="inherit" onClick={toggleDrawer}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6">Menu</Typography>
