@@ -8,7 +8,7 @@ require('dotenv').config();
 const cors = require('cors');
 
 // Configure Mongoose
-mongoose.set('useCreateIndex', true);
+// mongoose.set('useCreateIndex', true);
 
 // Initialize the app
 const app = express();

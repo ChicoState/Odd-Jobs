@@ -44,7 +44,7 @@ const PostJobPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setJobData((prevData) => ({ ...prevData, [name]: value }));
+    setJobData((prevData) => ({ ...prevData, [name]: name === 'pay' || name === 'duration' ? Number(value) : value }));
   };
 
   const handlePhotoUpload = (e) => {
@@ -100,7 +100,7 @@ const PostJobPage = () => {
       
       <TextField
         fullWidth
-        label="Job Title"
+        label="Title"
         name="title"
         value={jobData.title}
         onChange={handleChange}
@@ -122,7 +122,7 @@ const PostJobPage = () => {
       
       <TextField
         fullWidth
-        label="Location (Specific Address or Landmark)"
+        label="Location"
         name="location"
         value={jobData.location}
         onChange={handleChange}
@@ -131,10 +131,10 @@ const PostJobPage = () => {
       
       <TextField
         fullWidth
-        label="Pay (in USD)"
+        label="Pay"
         name="pay"
         type="number"
-        value={jobData.pay}
+        value={jobData.pay} // Ensure the value is a number
         onChange={handleChange}
         margin="normal"
         required
@@ -142,10 +142,10 @@ const PostJobPage = () => {
       
       <TextField
         fullWidth
-        label="Estimated Duration (in hours)"
+        label="Duration"
         name="duration"
         type="number"
-        value={jobData.duration}
+        value={jobData.duration} // Ensure the value is a number
         onChange={handleChange}
         margin="normal"
         required
