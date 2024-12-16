@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { Button, Container, TextField, Typography, Grid } from '@mui/material';
 
 export default function CreateAccount() {

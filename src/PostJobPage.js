@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Dialog, DialogTitle, DialogContent, DialogActions, Paper, Alert } from '@mui/material';
 import { styled } from '@mui/system';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import HomeIcon from '@mui/icons-material/Home';
 
 const FormContainer = styled(Paper)({

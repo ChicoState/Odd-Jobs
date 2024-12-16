@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, MarkerF, InfoWindowF } from '@react-google-maps/api';
 import './AcceptedJobs.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Container, Typography, Button, Box, IconButton, Avatar } from '@mui/material'; // Importing Material-UI components
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import CreateIcon from '@mui/icons-material/Create';
 import DoneIcon from '@mui/icons-material/Done';
 import SearchIcon from '@mui/icons-material/Search';

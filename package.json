@@ -12,15 +12,15 @@
     "@react-google-maps/api": "^2.20.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "latest",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "http-proxy-middleware": "^3.0.3",
     "mongoose": "^8.8.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-router-dom": "^7.0.2",
     "react-scripts": "^5.0.1",
     "text-encoding": "^0.7.0",
@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "start-mongo": "docker run --name mongodb -p 27017:27017 -d mongo",
     "stop-mongo": "docker stop mongodb && docker rm mongodb"
@@ -55,5 +55,22 @@
   },
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!src/setupTests.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ]
   }
 }
