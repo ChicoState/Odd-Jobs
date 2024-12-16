@@ -68,6 +68,7 @@
     ],
     "coverageReporters": [
       "json",
+      "html",
       "lcov",
       "text",
       "clover"
