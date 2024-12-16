@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
-// Mock react-router-dom's useNavigate
+// Mock useNavigate
 jest.mock('react-router-dom', () => {
-  const actual = jest.requireActual('react-router-dom');
+  const originalModule = jest.requireActual('react-router-dom');
   return {
-    ...actual,
+    ...originalModule,
     useNavigate: jest.fn(),
   };
 });
