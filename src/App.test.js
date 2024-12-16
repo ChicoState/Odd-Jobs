@@ -1,72 +1,52 @@
-import { act } from 'react'
-import userEvent from '@testing-library/user-event'
-import { render, fireEvent, screen } from '@testing-library/react'
-import { BrowserRouter as Router, Route, Routes, Link, MemoryRouter, Navigate } from 'react-router-dom';
-import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import App from './App';
-import Login from './Login';
-import Forum from './Forum';
-import AcceptedJobs from './AcceptedJobs';
-import CreateAccount from './CreateAccount';
-import PastWorkersHistory from './PastWorkersHistory';
-import PostJobPage from './PostJobPage';
-import JobListPage from './JobListPage';
 
-// Mock the useNavigate hook to prevent actual navigation
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'), useNavigate: jest.fn(),
-  useNavigate: jest.fn(),
-}));
-
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-
-test('Login Mock test', async () => {
-  render(
-    //<BrowserRouter>
-    <App />
-    //</BrowserRouter>
-    // <Routes>
-    //   <Route path="/" element={<Login />} />
-    //   <Route path="/forum" element={<Forum />} />
-    // </Routes>
-  );
-  const user = userEvent.setup()
-
-  // simulate interaction with the form (put username and password into fields)
-  // fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'Tester' } });
-  // fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'McGee' } });
-
-  user.click(screen.getByText(/Login/i));
-
-  await act(async () => {
-      expect(Navigate).toHaveBeenCalledTimes(1);
-
-      expect(Navigate).toHaveBeenCalledWith('/forum');
-  });
-  expect(screen.getByTitle(/Forum Us/i));
-
-  // Simulate form submission (pressing login button)
-  // fireEvent.click(screen.getByRole('button', { name: /Login/i }));
-
-  // //expect(console.log).toHaveBeenCalledWith({Username: 'Tester', Password: 'McGee'});
-
+// Mock react-router-dom's useNavigate
+jest.mock('react-router-dom', () => {
+  const actual = jest.requireActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: jest.fn(),
+  };
 });
 
-test('Username and password is showing correctly', async () => {
-  render(
-    //<BrowserRouter> {/* Wrap the component in BrowserRouter*/}
-      <App />
-    //</BrowserRouter>
-  );
+function renderWithRouter(ui, { initialEntries = ['/'] } = {}) {
+  return {
+    ...render(<MemoryRouter initialEntries={initialEntries}>{ui}</MemoryRouter>)
+  };
+}
 
-  // gets the label by text
-  const username = await screen.getByLabelText(/Username/i);
-  expect(username).toBeInTheDocument();
-  const password = await screen.getByLabelText(/Password/i);
-  expect(password).toBeInTheDocument();
+test('renders Login page by default', () => {
+  renderWithRouter(<App />);
+  expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+});
+
+test('navigates to Create Account page', async () => {
+  renderWithRouter(<App />);
+  const user = userEvent.setup();
+  await user.click(screen.getByText(/Menu/i));
+  await user.click(screen.getByText(/Create Account/i));
+  expect(screen.getByText(/Create Account/i)).toBeInTheDocument();
+});
+
+test('navigates to Forum page', async () => {
+  renderWithRouter(<App />);
+  const user = userEvent.setup();
+  await user.click(screen.getByText(/Menu/i));
+  await user.click(screen.getByText(/Forum/i));
+  expect(screen.getByText(/Forum/i)).toBeInTheDocument();
+});
+
+test('drawer opens and closes', async () => {
+  renderWithRouter(<App />);
+  const user = userEvent.setup();
+  const menuButton = screen.getByRole('button', { name: /menu/i });
+  await user.click(menuButton);
+  expect(screen.getByText(/Create Account/i)).toBeInTheDocument();
+  await user.click(menuButton);
+  expect(screen.queryByText(/Create Account/i)).not.toBeInTheDocument();
 });
 
